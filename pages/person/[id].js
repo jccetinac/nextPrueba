@@ -1,35 +1,50 @@
 import { useRouter } from 'next/router'
-
-export default function GspPage(props) {
-  const router = useRouter()
-  const { isFallback, query } = router
+import axios from 'axios';
+export default function GspPage({City, Student, Industry, Interest}) {
+  const router = useRouter();
+  const { isFallback, query } = router;
 
   if (isFallback) {
     return 'Loading...'
   }
   
-  console.log(props);
   return (
     <div>
       <h1>person</h1>
       <p>ID: {query.id}</p>
+      <p>{City}</p>
+      <p>{Student}</p>
+      <p>{Industry}</p>
+      <p>{Interest}</p>
     </div>
   )
 }
 
-export const getStaticProps = () => {
+export const getStaticPaths = async (ctx) => {
+
+  const pokemons151 = [...Array(200)].map( ( value, index ) => `${ index + 1 }` );
+
   return {
-    props: {
-      name: '123'
-    },
+    paths: pokemons151.map( id => ({
+      params: { id }
+    })),
+    fallback: false
   }
 }
 
-export const getStaticPaths = ({ locales }) => {
-  const paths = []
 
+export const getStaticProps = async ({params}) => {
+  const { id } = params ;
+  
+  const { data } = await axios.get(`https://retoolapi.dev/cSZH8I/data/${ id }`);
+
+  console.log(data);
   return {
-    paths,
-    fallback: true,
+    props: data,
   }
 }
+
+// You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
+
+
+

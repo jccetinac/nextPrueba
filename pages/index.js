@@ -1,7 +1,10 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import axios from 'axios';
 
-export default function Home() {
+import styles from '../styles/Home.module.css';
+import Person from '../components/Person';
+
+export default function Home({people}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,7 +15,17 @@ export default function Home() {
         <h1 className={styles.title}>
           Hola pianola to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {people.map( person => (
+          <Person person={person}/>
+        ))}
       </main>
     </div>
   );
+}
+
+export const getStaticProps = async () => {
+  const { data } = await axios.get('https://retoolapi.dev/cSZH8I/data');
+  return {
+    props: {people:data},
+  }
 }

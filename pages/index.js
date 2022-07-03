@@ -1,19 +1,18 @@
-import useSWR from 'swr'
-import Person from '../components/Person'
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
-
-export default function Index() {
-  const { data, error } = useSWR('/api/people', fetcher)
-
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-
+export default function Home() {
   return (
-    <ul>
-      {data.map((p, i) => (
-        <Person key={i} person={p} />
-      ))}
-    </ul>
-  )
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+      </Head>
+
+      <main className={styles.bg}>
+        <h1 className={styles.title}>
+          Hola pianola to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
+      </main>
+    </div>
+  );
 }

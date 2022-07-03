@@ -7,7 +7,8 @@ export default function GspPage(props) {
   if (isFallback) {
     return 'Loading...'
   }
-
+  
+  console.log(props);
   return (
     <div>
       <h1>person</h1>

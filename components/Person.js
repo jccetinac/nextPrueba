@@ -3,6 +3,11 @@ import styles from '../styles/Home.module.css';
 
 export default function Person({ person, details }) {
   const { id, City, Student, Industry, Interest } = person;
+
+  const deleteHandle = (idUser)=>{
+    console.log('delete ' + idUser);
+  };
+
   return (
     <div className={styles.containerPerson}>
       <p>{Student}</p>
@@ -13,11 +18,12 @@ export default function Person({ person, details }) {
           <p>{Interest}</p>
         </>
       ) : (
-        <li>
-        <Link href="/person/[id]" as={`/person/${id}`}>
-          <a>ver más</a>
-        </Link>
-      </li>
+        <div className='actions'>
+          <Link href="/person/[id]" as={`/person/${id}`}>
+            <a>ver más</a>
+          </Link>
+          <button onClick={()=>deleteHandle(id)}>Delete</button>
+        </div>
       )}
 
 

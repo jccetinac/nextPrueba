@@ -24,8 +24,8 @@ export default function GspPage(person) {
 
 export const getStaticPaths = async (ctx) => {
 
-  const {data} = await axios.get('https://retoolapi.dev/cSZH8I/data/');
-  const peopleList = [...Array(data.length)].map( ( value, index ) => `${ index + 1 }` );
+  const {data} = await axios.get('https://retoolapi.dev/ptT4Ib/data/');
+  const peopleList = [...Array(200)].map( ( value, index ) => `${ index }` );
 
   return {
     paths: peopleList.map( id => ({
@@ -38,8 +38,8 @@ export const getStaticPaths = async (ctx) => {
 
 export const getStaticProps = async ({params}) => {
   const { id } = params ;
-  
-  const { data } = await axios.get(`https://retoolapi.dev/cSZH8I/data/${ id }`);
+  console.log('[EL ID]',id);
+  const { data } = await axios.get(`https://retoolapi.dev/ptT4Ib/data/${ id }`);
 
   console.log(data);
   return {

@@ -6,6 +6,8 @@ import axios from 'axios';
 import styles from '../styles/Home.module.css';
 import Person from '../components/Person';
 import CreatePerson from '../components/CreatePerson';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp,faHeart,faComments,faShareSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default function Home({people}) {
   console.log('reinicio');
@@ -15,9 +17,6 @@ export default function Home({people}) {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <h1 className={styles.title}>
-          Test Next.js + React
-        </h1>
       <div>
       </div>
       <div className={styles.containerMain}>

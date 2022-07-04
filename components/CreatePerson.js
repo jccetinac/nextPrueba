@@ -43,12 +43,12 @@ export default function CreatePerson({userData}) {
   return (
     <div className={styles.createContainer}>
     <form onSubmit={(e)=> createPerson(e)} className={styles.formCreate}>
-      <h4>crear usuario</h4>
+      <h4>{userData? 'Editar Datos de Usuario': 'Crear usuario'}</h4>
       <input type="text" value={student} onChange={(e)=>{setStudent(e.target.value)}} className={styles.input} placeholder='Nombre'></input>
       <input type="text" value={city} onChange={(e)=>{setCity(e.target.value)}} className={styles.input} placeholder='City'></input>
       <input type="text" value={industry} onChange={(e)=>{setIndustry(e.target.value)}} className={styles.input} placeholder='Industry'></input>
       <input type="text" value={interest} onChange={(e)=>{setInterest(e.target.value)}} className={styles.input} placeholder='Interest'></input>
-      <button>{userData? 'Actualizar':'Crear'}</button>
+      <button className={styles.buttonSend}>{userData? 'Actualizar':'Crear'}</button>
     </form>
 
 </div>

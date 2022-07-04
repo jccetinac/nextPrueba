@@ -47,7 +47,6 @@ export const getStaticPaths = async (ctx) => {
 export const getStaticProps = async ({ params }) => {
   const { id } = params;
   const { data } = await axios.get(`https://retoolapi.dev/ptT4Ib/data/${id}`);
-  console.log(data);
   return {
     props: data,
   }

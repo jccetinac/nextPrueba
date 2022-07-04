@@ -14,7 +14,6 @@ export default function CreatePerson({userData}) {
     const createPerson = async (e)=>{
        e.preventDefault();
 
-        console.log('creating');
         const url = 'https://retoolapi.dev/ptT4Ib/data';
         const payload = {
             "City": city,

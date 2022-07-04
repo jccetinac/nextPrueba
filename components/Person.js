@@ -9,7 +9,6 @@ export default function Person({ person, details }) {
   const { id, City, Student, Industry, Interests } = person;
 
   const deleteHandle = async (idUser) => {
-    console.log('delete ' + idUser);
     const url = `https://retoolapi.dev/ptT4Ib/data/${idUser}`
     const response = await axios.delete(url);
     Router.push('/');
@@ -17,7 +16,7 @@ export default function Person({ person, details }) {
   };
 
   return (
-    <div className={styles.containerPerson}>
+    <div className={styles.containerPerson} key={id}>
       <div className={styles.profileUser}>
         <Link href="/person/[id]" as={`/person/${id}`}>
           <div className={styles.imageButton}>

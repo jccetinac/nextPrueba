@@ -8,8 +8,21 @@ import Person from '../components/Person';
 import CreatePerson from '../components/CreatePerson';
 
 export default function Home({people}) {
-  console.log('reinicio');
-  const [userSelected, setUserSelected] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [peopleFiltered, setPeopleFiltered] = useState(people);
+
+  const updateListByFilter = (filterValue) => {
+    setPeopleFiltered(people);
+    console.log('[ANTES]', peopleFiltered);
+
+    console.log(filterValue);
+    setFilter(filterValue);
+    const tempList = peopleFiltered.filter(person => person.Student.toLowerCase().indexOf(filterValue) > -1);
+
+    setPeopleFiltered(tempList);
+    console.log('[DPS]',peopleFiltered);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,9 +32,20 @@ export default function Home({people}) {
       </div>
       <div className={styles.containerMain}>
         <main className={styles.main}>
+          <form>
+          <input 
+            type="text" 
+            value={filter} 
+            onChange={(e)=>updateListByFilter(e.target.value)} 
+            className={styles.input}
+             placeholder="search by name"
+          />            
+          </form>
+
+
           <h1>User List</h1>
-          {people.map( person => (
-            <Person person={person} setUserSelected={setUserSelected}/>
+          {peopleFiltered?.map( person => (
+            <Person key={person.id} person={person}/>
           ))}
         </main>
         <CreatePerson />
@@ -31,6 +55,7 @@ export default function Home({people}) {
 }
 
 export const getStaticProps = async () => {
+
   const { data } = await axios.get('https://retoolapi.dev/ptT4Ib/data');
   return {
     props: {people:data.reverse()},

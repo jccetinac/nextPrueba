@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -7,7 +9,7 @@ import CreatePerson from '../components/CreatePerson';
 
 export default function Home({people}) {
   console.log('reinicio');
-
+  const [userSelected, setUserSelected] = useState(null);
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +24,7 @@ export default function Home({people}) {
         <main className={styles.main}>
           <h1>Lista de usuarios</h1>
           {people.map( person => (
-            <Person person={person}/>
+            <Person person={person} setUserSelected={setUserSelected}/>
           ))}
         </main>
         <CreatePerson />

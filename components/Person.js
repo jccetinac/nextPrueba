@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css';
 import Router from 'next/router'
 
-export default function Person({ person, details }) {
+export default function Person({ person, details,  setUserSelected }) {
   const { id, City, Student, Industry, Interest } = person;
 
   const deleteHandle = async (idUser)=>{

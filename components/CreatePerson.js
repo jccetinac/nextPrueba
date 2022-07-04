@@ -3,11 +3,12 @@ import Router from 'next/router'
 import axios from 'axios';
 import { useState } from 'react';
 
-export default function CreatePerson() {
-  const [student, setStudent] = useState('');
-  const [city, setCity] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [interest, setInterest] = useState('');
+export default function CreatePerson({userData}) {
+
+  const [student, setStudent] = useState(userData? userData.Student : '');
+  const [city, setCity] = useState(userData? userData.City : '');
+  const [industry, setIndustry] = useState(userData? userData.Industry : '');
+  const [interest, setInterest] = useState(userData? userData.Interests: '');
 
 
     const createPerson = async (e)=>{
@@ -22,11 +23,19 @@ export default function CreatePerson() {
             "Interests": interest
         };
         try{
-          const response = await axios.post(url, payload);
-          console.log(response);
-          Router.push('/');
+          if(userData){
+            const response = await axios.put(`${url}/${userData.id}`, payload);
+            console.log(response);
+            Router.push(`/person/${userData.id}`);
+
+          }
+          else{
+            const response = await axios.post(url, payload);
+            console.log(response);
+            Router.push(`/`);
+          }
         }catch(e){
-          console.log('algo fallo');
+          console.log('algo fallo', e);
         }
 
       }
@@ -35,12 +44,11 @@ export default function CreatePerson() {
     <div className={styles.createContainer}>
     <form onSubmit={(e)=> createPerson(e)} className={styles.formCreate}>
       <h4>crear usuario</h4>
-      <input type="text" onChange={(e)=>{setStudent(e.target.value)}} className={styles.input} placeholder='Nombre'></input>
-      <input type="text" onChange={(e)=>{setCity(e.target.value)}} className={styles.input} placeholder='City'></input>
-      <input type="text" onChange={(e)=>{setIndustry(e.target.value)}} className={styles.input} placeholder='Industry'></input>
-      <input type="text" onChange={(e)=>{setInterest(e.target.value)}} className={styles.input} placeholder='Interest'></input>
-      <button>crear</button>
-
+      <input type="text" value={student} onChange={(e)=>{setStudent(e.target.value)}} className={styles.input} placeholder='Nombre'></input>
+      <input type="text" value={city} onChange={(e)=>{setCity(e.target.value)}} className={styles.input} placeholder='City'></input>
+      <input type="text" value={industry} onChange={(e)=>{setIndustry(e.target.value)}} className={styles.input} placeholder='Industry'></input>
+      <input type="text" value={interest} onChange={(e)=>{setInterest(e.target.value)}} className={styles.input} placeholder='Interest'></input>
+      <button>{userData? 'Actualizar':'Crear'}</button>
     </form>
 
 </div>

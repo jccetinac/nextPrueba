@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import axios from 'axios';
 import Person from '../../components/Person';
-export default function GspPage(person) {
+import CreatePerson from '../../components/CreatePerson';
+export default function PersonById(person) {
   const router = useRouter();
   const { isFallback, query } = router;
 
@@ -15,9 +16,10 @@ export default function GspPage(person) {
   return (
     <div>
       <Person person={person} details/>
-      <Link href="/" as="/">
+        <Link href="/" as="/">
           <a>volver a la lista</a>
         </Link>
+        <CreatePerson userData={person} />
     </div>
   )
 }
@@ -25,7 +27,8 @@ export default function GspPage(person) {
 export const getStaticPaths = async (ctx) => {
 
   const {data} = await axios.get('https://retoolapi.dev/ptT4Ib/data/');
-  const peopleList = [...Array(200)].map( ( value, index ) => `${ index }` );
+  console.log(data.length, '[largo]');
+  const peopleList = [...Array(data.length+1)].map( ( value, index ) => `${ index }` );
 
   return {
     paths: peopleList.map( id => ({

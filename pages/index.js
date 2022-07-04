@@ -12,15 +12,9 @@ export default function Home({people}) {
   const [peopleFiltered, setPeopleFiltered] = useState(people);
 
   const updateListByFilter = (filterValue) => {
-    setPeopleFiltered(people);
-    console.log('[ANTES]', peopleFiltered);
-
-    console.log(filterValue);
     setFilter(filterValue);
-    const tempList = peopleFiltered.filter(person => person.Student.toLowerCase().indexOf(filterValue) > -1);
-
+    const tempList = people.filter(person => person.Student.toLowerCase().indexOf(filterValue) > -1);
     setPeopleFiltered(tempList);
-    console.log('[DPS]',peopleFiltered);
   }
 
   return (

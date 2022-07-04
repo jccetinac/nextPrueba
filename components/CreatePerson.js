@@ -35,7 +35,7 @@ export default function CreatePerson({userData}) {
             Router.push(`/`);
           }
         }catch(e){
-          console.log('algo fallo', e);
+          console.log('something was wrong', e);
         }
 
       }
@@ -44,7 +44,7 @@ export default function CreatePerson({userData}) {
     <div className={styles.createContainer}>
     <form onSubmit={(e)=> createPerson(e)} className={styles.formCreate}>
       <h4>{userData? 'Editar Datos de Usuario': 'Crear usuario'}</h4>
-      <input type="text" value={student} onChange={(e)=>{setStudent(e.target.value)}} className={styles.input} placeholder='Nombre'></input>
+      <input type="text" value={student} onChange={(e)=>{setStudent(e.target.value)}} className={styles.input} placeholder='Name'></input>
       <input type="text" value={city} onChange={(e)=>{setCity(e.target.value)}} className={styles.input} placeholder='City'></input>
       <input type="text" value={industry} onChange={(e)=>{setIndustry(e.target.value)}} className={styles.input} placeholder='Industry'></input>
       <input type="text" value={interest} onChange={(e)=>{setInterest(e.target.value)}} className={styles.input} placeholder='Interest'></input>

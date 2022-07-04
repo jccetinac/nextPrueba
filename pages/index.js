@@ -6,8 +6,6 @@ import axios from 'axios';
 import styles from '../styles/Home.module.css';
 import Person from '../components/Person';
 import CreatePerson from '../components/CreatePerson';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp,faHeart,faComments,faShareSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default function Home({people}) {
   console.log('reinicio');
@@ -15,13 +13,13 @@ export default function Home({people}) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>University Students</title>
       </Head>
       <div>
       </div>
       <div className={styles.containerMain}>
         <main className={styles.main}>
-          <h1>Lista de usuarios</h1>
+          <h1>User List</h1>
           {people.map( person => (
             <Person person={person} setUserSelected={setUserSelected}/>
           ))}

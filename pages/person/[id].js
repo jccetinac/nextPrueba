@@ -21,7 +21,7 @@ export default function PersonById(person) {
         <main className={styles.main}>
           <Person person={person} details />
           <Link href="/" as="/">
-            <a className={styles.buttonSend}>volver a la lista</a>
+            <a className={styles.buttonSend}>back to list</a>
           </Link>
         </main>
         <CreatePerson userData={person} />
@@ -33,7 +33,6 @@ export default function PersonById(person) {
 export const getStaticPaths = async (ctx) => {
 
   const { data } = await axios.get('https://retoolapi.dev/ptT4Ib/data/');
-  console.log(data.length, '[largo]');
   const peopleList = [...Array(data.length + 1)].map((value, index) => `${index}`);
 
   return {
@@ -47,9 +46,7 @@ export const getStaticPaths = async (ctx) => {
 
 export const getStaticProps = async ({ params }) => {
   const { id } = params;
-  console.log('[EL ID]', id);
   const { data } = await axios.get(`https://retoolapi.dev/ptT4Ib/data/${id}`);
-
   console.log(data);
   return {
     props: data,

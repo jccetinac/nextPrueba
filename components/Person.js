@@ -26,7 +26,7 @@ export default function Person({ person, details }) {
         </Link>
       </div>
       <div className={styles.detailsUser}>
-      <h3><b>Name: </b>{Student}</h3>
+      <h3><b>{Student} </b></h3>
       <p><b>IdUser: </b>{id}</p>
 
       {details ? (
